@@ -1,9 +1,10 @@
+
 #include <Windows.h>
 #include <tlhelp32.h>
 #include <Psapi.h>
 #include <string>
 
-#define MAX_PATH 256
+#include "ParentProcessName.h"
 
 DWORD GetParentProcessId() {
 	DWORD dwCurrentProcessId = GetCurrentProcessId();
@@ -56,14 +57,4 @@ bool DetectTTDWithParentProcessName()
 
 	_wcslwr_s(wsWindowTitle);
 	return wcsstr(wsWindowTitle, L"ttd.exe");
-}
-
-int main() {
-	if (DetectTTDWithParentProcessName()) {
-		printf("TTD detected\n");
-	}
-
-	printf("Hello, World!\n");
-	getchar();
-	return 0;
 }

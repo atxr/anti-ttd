@@ -24,7 +24,7 @@
     <ProjectGuid>{5ef90847-dc7a-4cc9-a45d-cddd01cc0a14}</ProjectGuid>
     <RootNamespace>antittd</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>ParentProcessName</ProjectName>
+    <ProjectName>anti-ttd</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -128,7 +128,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PageGuard.cpp" />
     <ClCompile Include="ParentProcessName.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PageGuard.h" />
+    <ClInclude Include="ParentProcessName.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
