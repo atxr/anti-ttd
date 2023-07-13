@@ -24,12 +24,18 @@
     <ClCompile Include="PageGuard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DebugFilterState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PageGuard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ParentProcessName.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugFilterState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

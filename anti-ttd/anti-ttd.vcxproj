@@ -128,11 +128,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DebugFilterState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PageGuard.cpp" />
     <ClCompile Include="ParentProcessName.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DebugFilterState.h" />
     <ClInclude Include="PageGuard.h" />
     <ClInclude Include="ParentProcessName.h" />
   </ItemGroup>
