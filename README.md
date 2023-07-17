@@ -7,7 +7,7 @@ Different method to detect (or not) TTD.exe.
 | SuspendThread (ParentProcessName) | ✅ | Check if the parent process name is "ttd.exe" |
 | Guard Pages | ❌ | Trigger a page guard fault  |
 | NtSetDebugFilterState | ✅ | Check if Debug privileges are enabled. Not precise enough. |
-| Bad String Format | ❌ | Not relevant (OllyDbg bug) |
+| IsDebuggerPresent | ❌ | TTD doesn't activate the debug flag in the PEB |
 | INT3 Instruction Scanning |  |  |
 | Interrupts |  |  |
 | Performing Code Checksum |  |  |
@@ -16,7 +16,6 @@ Different method to detect (or not) TTD.exe.
 | GetLocalTime, GetSystemTime, timeGetTime, NtQueryPerformanceCounter |  |  |
 | NtGlobalFlag |  |  |
 | Heap Flag |  |  |
-| IsDebugged Flag |  |  |
 | CloseHandle, NtClose |  |  |
 | CsrGetProcessID |  |  |
 | EventPairHandles |  |  |
@@ -25,7 +24,6 @@ Different method to detect (or not) TTD.exe.
 | NtSetInformationThread |  |  |
 | NtQueryInformationProcess |  |  |
 | CheckRemoteDebuggerPresent |  |  |
-| IsDebuggerPresent |  |  |
 | TLS Callback |  |  |
 | Call to Interrupt Procedure |  |  |
 | AddVectoredExceptionHandler |  |  |

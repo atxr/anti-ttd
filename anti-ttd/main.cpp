@@ -11,6 +11,7 @@ int main() {
 	printf("TTD%s detected with DetectTTDWithParentProcessName\n", DetectTTDWithParentProcessName() ? "" : " not");
 	printf("TTD%s detected with DetectTTDWithPageGuard\n", DetectTTDWithPageGuard() ? "" : " not");
 	printf("TTD%s detected with DetectTTDWithDebugFilterState (will be triggered if debug priviledges enabled)\n", DetectTTDWithDebugFilterState() ? "" : " not");
+	printf("TTD%s detected with DetectTTDWithIsDebuggerPresent\n", IsDebuggerPresent() ? "" : " not");
 
 	getchar();
 	printf("\n\n\n");
