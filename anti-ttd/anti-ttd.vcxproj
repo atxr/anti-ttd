@@ -132,9 +132,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PageGuard.cpp" />
     <ClCompile Include="ParentProcessName.cpp" />
+    <ClCompile Include="Handles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugFilterState.h" />
+    <ClInclude Include="Handles.h" />
     <ClInclude Include="PageGuard.h" />
     <ClInclude Include="ParentProcessName.h" />
   </ItemGroup>
