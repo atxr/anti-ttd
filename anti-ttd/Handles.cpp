@@ -5,7 +5,7 @@ PVOID GetLibraryProcAddress(PCSTR LibraryName, PCSTR ProcName)
 	return GetProcAddress(GetModuleHandleA(LibraryName), ProcName);
 }
 
-int test()
+BOOL DetectTTDWithHandles()
 {
 	_NtQuerySystemInformation NtQuerySystemInformation = (_NtQuerySystemInformation)
 		GetLibraryProcAddress("ntdll.dll", "NtQuerySystemInformation");
@@ -19,6 +19,7 @@ int test()
 	ULONG pid;
 	HANDLE processHandle;
 	ULONG i;
+	BOOL detected = FALSE;
 
 
 	pid = GetCurrentProcessId();
@@ -47,8 +48,8 @@ int test()
 	{
 		SYSTEM_HANDLE handle = handleInfo->Handles[i];
 		HANDLE dupHandle = NULL;
-		POBJECT_TYPE_INFORMATION objectTypeInfo;
-		PVOID objectNameInfo;
+		POBJECT_TYPE_INFORMATION objectTypeInfo = nullptr;
+		PVOID objectNameInfo = nullptr;
 		UNICODE_STRING objectName;
 		ULONG returnLength;
 
@@ -67,7 +68,6 @@ int test()
 			0
 		)))
 		{
-			printf("[%#x] Error!\n", handle.Handle);
 			continue;
 		}
 
@@ -81,9 +81,7 @@ int test()
 			NULL
 		)))
 		{
-			printf("[%#x] Error!\n", handle.Handle);
-			CloseHandle(dupHandle);
-			continue;
+			goto end_loop;
 		}
 
 		// FIXME
@@ -124,17 +122,7 @@ int test()
 				NULL
 			)))
 			{
-				/* We have the type name, so just display that. */
-				printf(
-					"[%#x] %.*S: (could not get name)\n",
-					handle.Handle,
-					objectTypeInfo->Name.Length / 2,
-					objectTypeInfo->Name.Buffer
-				);
-				free(objectTypeInfo);
-				free(objectNameInfo);
-				CloseHandle(dupHandle);
-				continue;
+				goto end_loop;
 			}
 		}
 
@@ -144,34 +132,22 @@ int test()
 		/* Print the information! */
 		if (objectName.Length)
 		{
-			/* The object has a name. */
-			printf(
-				"[%#x] %.*S: %.*S\n",
-				handle.Handle,
-				objectTypeInfo->Name.Length / 2,
-				objectTypeInfo->Name.Buffer,
-				objectName.Length / 2,
-				objectName.Buffer
-			);
-		}
-		else
-		{
-			/* Print something else. */
-			printf(
-				"[%#x] %.*S: (unnamed)\n",
-				handle.Handle,
-				objectTypeInfo->Name.Length / 2,
-				objectTypeInfo->Name.Buffer
-			);
+			// The object has a name.
+			if (wcsstr(objectName.Buffer, L".run")) {
+				detected = TRUE;
+			}
 		}
 
-		free(objectTypeInfo);
-		free(objectNameInfo);
-		CloseHandle(dupHandle);
+	end_loop:
+		if (objectTypeInfo) free(objectTypeInfo);
+		if (objectNameInfo) free(objectNameInfo);
+		if (dupHandle) CloseHandle(dupHandle);
+
+		if (detected) break;
 	}
 
 	free(handleInfo);
 	CloseHandle(processHandle);
 
-	return 0;
+	return detected;
 }

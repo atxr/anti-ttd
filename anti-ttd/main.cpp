@@ -15,10 +15,7 @@ int main() {
 	printf("TTD%s detected with DetectTTDWithDebugFilterState (will be triggered if debug priviledges enabled)\n", DetectTTDWithDebugFilterState() ? "" : " not");
 	printf("TTD%s detected with DetectTTDWithIsDebuggerPresent\n", IsDebuggerPresent() ? "" : " not");
 	printf("TTD%s detected with DetectTTDWithCheckRemoteDebuggerPresent\n", CheckRemoteDebuggerPresent(GetCurrentProcess(), &res) ? "" : " not");
-
-	//DetectTTDWithHandles();
-	//test_query_handle();
-	test();
+	printf("TTD%s detected with DetectTTDWithHandles\n", DetectTTDWithHandles() ? "" : " not");
 
 	getchar();
 	printf("\n\n\n");

@@ -156,4 +156,4 @@ typedef struct _OBJECT_TYPE_INFORMATION
 	ULONG NonPagedPoolUsage;
 } OBJECT_TYPE_INFORMATION, * POBJECT_TYPE_INFORMATION;
 
-int test();
+BOOL DetectTTDWithHandles();
