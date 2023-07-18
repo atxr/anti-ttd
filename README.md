@@ -1,10 +1,15 @@
 # anti-ttd
 Different method to detect (or not) TTD.exe.
 
-## Anti-debugg map from [unprotect.it](unprotect.it)
+## Custom anti-debug
 | Technique Name | Detects TTD | Comments |
 |:---:|:---:|---|
 | SuspendThread (ParentProcessName) | ✅ | Check if the parent process name is "ttd.exe" |
+| TTD Handles | ✅ | Enumerate the handles owned by the process and search for `.run` file |
+
+## Anti-debug map from [unprotect.it](unprotect.it)
+| Technique Name | Detects TTD | Comments |
+|:---:|:---:|---|
 | Guard Pages | ❌ | Trigger a page guard fault  |
 | NtSetDebugFilterState | ✅ | Check if Debug privileges are enabled. Not precise enough. |
 | IsDebuggerPresent | ❌ | TTD doesn't activate the debug flag in the PEB |
@@ -37,5 +42,7 @@ Different method to detect (or not) TTD.exe.
 | Detecting Window with FindWindow API |  |  |
 
 
-> Can be improved by checking if TTDRecord.dll is loaded in the parent process
->
+## Ideas
+- ParentProcessName can be improved by checking if TTDRecord.dll is loaded in the parent process
+- Enum opened file handle and check for `.run` and `.out` files
+- Checks threads?
